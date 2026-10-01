@@ -1,0 +1,48 @@
+/* Khung.css — Khung 1 khối */
+.khung {
+  background: #ffffff;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(194, 65, 12, 0.06);
+}
+
+.khung__dau {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border-bottom: 1px solid #fed7aa;
+}
+
+.khung__tieu-de {
+  margin: 0;
+  color: #7c2d12;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.khung__hanh-dong button {
+  padding: 6px 14px;
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.khung__hanh-dong button:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
+
+.khung__than {
+  padding: 20px;
+}

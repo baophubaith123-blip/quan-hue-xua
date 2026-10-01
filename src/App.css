@@ -603,3 +603,481 @@ body {
     padding: 20px;
   }
 }
+
+/* ============================================================
+   Card Món ăn — Nút "Thêm" và "Chi tiết" (compact cho 5 cột)
+   ============================================================ */
+
+.mon-an-card__hanh-dong {
+  display: flex;
+  gap: 4px;                 /* ✅ Giảm gap từ 6px → 4px */
+  margin-top: 8px;
+  width: 100%;
+}
+
+/* ✅ Nút "Thêm" — gọn hơn, không có icon hoặc icon nhỏ */
+.nut-them {
+  flex: 1 1 0;              /* ✅ Cho phép co lại */
+  min-width: 0;             /* ✅ Cho phép co nhỏ hơn nội dung */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 6px;         /* ✅ Giảm padding */
+  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.7rem;        /* ✅ Giảm từ 0.78rem → 0.7rem */
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(124, 45, 18, 0.2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nut-them:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 45, 18, 0.3);
+}
+
+.nut-them:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #9ca3af;
+  box-shadow: none;
+}
+
+/* ✅ Nút "Chi tiết" — gọn hơn */
+.nut-chi-tiet {
+  flex: 1 1 0;              /* ✅ Cho phép co lại */
+  min-width: 0;             /* ✅ Cho phép co nhỏ hơn nội dung */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 6px;         /* ✅ Giảm padding */
+  background: #ffffff;
+  color: #c2410c;
+  border: 1.5px solid #c2410c;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.7rem;        /* ✅ Giảm từ 0.78rem → 0.7rem */
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nut-chi-tiet:hover {
+  background: #fff7ed;
+  border-color: #7c2d12;
+  color: #7c2d12;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   Empty Cart — Giỏ hàng trống đẹp
+   ============================================================ */
+
+.gio-hang-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 2px dashed #fdba74;
+  border-radius: 16px;
+  min-height: 300px;
+}
+
+.gio-hang-empty__icon {
+  font-size: 5rem;
+  margin-bottom: 16px;
+  opacity: 0.7;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.gio-hang-empty__title {
+  margin: 0 0 12px;
+  color: #7c2d12;
+  /* ✅ Font Vietnamese-friendly — không bị tách dấu */
+  font-family: 'Inter', 'Be Vietnam Pro', system-ui, -apple-system,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.gio-hang-empty__desc {
+  margin: 0 0 24px;
+  color: #9a3412;
+  font-family: 'Inter', 'Be Vietnam Pro', system-ui, -apple-system,
+    'Segoe UI', Roboto, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.gio-hang-empty__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 16px rgba(124, 45, 18, 0.25);
+}
+
+.gio-hang-empty__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(124, 45, 18, 0.35);
+}
+
+.gio-hang-empty__btn:active {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Fix: Header trang giỏ hàng — không chồng chữ
+   ============================================================ */
+
+.gio-hang-page__header {
+  position: relative;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  min-height: 48px;
+}
+
+.gio-hang-page__header h1 {
+  color: #7c2d12;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.6rem;
+  margin: 0;
+  text-align: center;
+}
+
+.gio-hang-page__back {
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1.5px solid #fed7aa;
+  border-radius: 10px;
+  color: #c2410c;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.gio-hang-page__back:hover {
+  background: #fff7ed;
+  border-color: #c2410c;
+  transform: translateX(-2px);
+}
+
+@media (max-width: 640px) {
+  .gio-hang-page__header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gio-hang-page__header h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* ============================================================
+   Trang Giỏ hàng — Header layout mới (không chồng chữ)
+   ============================================================ */
+
+.gio-hang-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.gio-hang-page__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.gio-hang-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1.5px solid #fed7aa;
+  border-radius: 10px;
+  color: #c2410c;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;   /* ✅ Không cho co lại */
+}
+
+.gio-hang-page__back:hover {
+  background: #fff7ed;
+  border-color: #c2410c;
+  transform: translateX(-2px);
+}
+
+/* ✅ Heading chiếm phần còn lại, có icon riêng */
+.gio-hang-page__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: #7c2d12;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  flex: 1;          /* ✅ Cho phép chiếm chỗ */
+  min-width: 0;     /* ✅ Cho phép co */
+}
+
+.gio-hang-page__title-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+/* Mobile — xếp dọc */
+@media (max-width: 640px) {
+  .gio-hang-page__header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .gio-hang-page__title {
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  .gio-hang-page__back {
+    align-self: flex-start;
+  }
+}
+
+/* ============================================================
+   Empty Cart — Đầy đủ nút CTA
+   ============================================================ */
+
+.gio-hang-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 2px dashed #fdba74;
+  border-radius: 16px;
+  min-height: 320px;
+}
+
+.gio-hang-empty__icon {
+  font-size: 5rem;
+  margin-bottom: 16px;
+  opacity: 0.7;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.gio-hang-empty__title {
+  margin: 0 0 12px;
+  color: #7c2d12;
+  /* ✅ Font sans-serif hỗ trợ tiếng Việt tốt — KHÔNG bị tách dấu */
+  font-family: 'Inter', 'Be Vietnam Pro', 'Segoe UI', Roboto,
+    system-ui, -apple-system, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.gio-hang-empty__desc {
+  margin: 0 0 24px;
+  color: #9a3412;
+  font-family: 'Inter', 'Be Vietnam Pro', 'Segoe UI', Roboto,
+    system-ui, -apple-system, Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+/* ✅ Nút CTA — luôn hiển thị đầy đủ */
+.gio-hang-empty__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 16px rgba(124, 45, 18, 0.25);
+  white-space: nowrap;
+}
+
+.gio-hang-empty__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(124, 45, 18, 0.35);
+}
+
+.gio-hang-empty__btn:active {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Nút "Đặt món" — Form đặt món (đẹp như nút "Thêm")
+   ============================================================ */
+
+.nut-dat-mon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 24px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 16px rgba(124, 45, 18, 0.25);
+  letter-spacing: 0.02em;
+}
+
+.nut-dat-mon:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(124, 45, 18, 0.35);
+  background: linear-gradient(135deg, #7c2d12 0%, #9a3412 100%);
+}
+
+.nut-dat-mon:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(124, 45, 18, 0.25);
+}
+
+.nut-dat-mon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #9ca3af;
+  box-shadow: none;
+  transform: none;
+}
+
+.nut-dat-mon__icon {
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   Form đặt món — căn chỉnh đẹp hơn
+   ============================================================ */
+
+.dat-mon-form {
+  padding: 0;
+}
+
+.dat-mon-form .truong {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.dat-mon-form .truong label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #7c2d12;
+}
+
+.dat-mon-form .truong input,
+.dat-mon-form .truong textarea {
+  padding: 11px 14px;
+  border: 2px solid #fed7aa;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: #ffffff;
+}
+
+.dat-mon-form .truong input:focus,
+.dat-mon-form .truong textarea:focus {
+  border-color: #c2410c;
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.1);
+}
+
+.dat-mon-form .truong input[aria-invalid='true'],
+.dat-mon-form .truong textarea[aria-invalid='true'] {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+
+.dat-mon-form .truong textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ✅ Lỗi — chữ đỏ nhỏ bên dưới ô */
+.loi {
+  color: #dc2626;
+  font-size: 0.78rem;
+  margin: 0;
+  font-style: italic;
+  padding-left: 2px;
+}
+
+.loi::before {
+  content: '⚠ ';
+  font-style: normal;
+}

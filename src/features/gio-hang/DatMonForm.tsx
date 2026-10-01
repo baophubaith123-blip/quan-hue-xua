@@ -1,43 +1,58 @@
-// DatMonForm.tsx — Form đặt món (controlled + validation)
-import { useState } from 'react';
-import type { FormEvent, ChangeEvent, FocusEvent } from 'react';
-import { Nut } from '../../components/Nut';
+// DatMonForm.tsx — Form đặt món
+// Gap 5: Controlled form + validation + useRef focus
+// INT.7.18 — Web FrontEnd nâng cao
 
-export interface DuLieuDatMon {
+import { useState, useRef, useEffect } from 'react';
+import type { FormEvent, ChangeEvent, FocusEvent } from 'react';
+
+export interface DuLieuForm {
   hoTen: string;
   soDienThoai: string;
-  diaChi: string;
   ghiChu: string;
 }
 
-const GIA_TRI_BAN_DAU: DuLieuDatMon = {
+interface LoiForm {
+  hoTen?: string;
+  soDienThoai?: string;
+}
+
+const GIA_TRI_BAN_DAU: DuLieuForm = {
   hoTen: '',
   soDienThoai: '',
-  diaChi: '',
   ghiChu: '',
 };
 
-function kiemChung(d: DuLieuDatMon): Record<string, string> {
-  const loi: Record<string, string> = {};
-  if (!d.hoTen.trim()) loi.hoTen = 'Vui lòng nhập họ tên.';
-  if (!/^[0-9]{10,11}$/.test(d.soDienThoai))
-    loi.soDienThoai = 'SĐT phải có 10-11 chữ số.';
-  if (!d.diaChi.trim()) loi.diaChi = 'Vui lòng nhập địa chỉ.';
+// ✅ Hàm kiểm tra — chuỗi chính xác theo đề
+function kiemTra(d: DuLieuForm): LoiForm {
+  const loi: LoiForm = {};
+
+  // "Họ tên cần ít nhất 2 ký tự"
+  if (d.hoTen.trim().length < 2) {
+    loi.hoTen = 'Họ tên cần ít nhất 2 ký tự';
+  }
+
+  // "Số điện thoại gồm 10 chữ số, bắt đầu bằng 0"
+  if (!/^0\d{9}$/.test(d.soDienThoai.trim())) {
+    loi.soDienThoai = 'Số điện thoại gồm 10 chữ số, bắt đầu bằng 0';
+  }
+
   return loi;
 }
 
-interface DatMonFormProps {
-  tongTien: number;
-  onDatHang: (duLieu: DuLieuDatMon) => Promise<void>;
+interface FormDatMonProps {
+  onGui: (duLieu: DuLieuForm) => void;
+  choPhepGui: boolean;
 }
 
-export function DatMonForm({ tongTien, onDatHang }: DatMonFormProps) {
-  const [duLieu, setDuLieu] = useState<DuLieuDatMon>(GIA_TRI_BAN_DAU);
-  const [daCham, setDaCham] = useState<Record<string, boolean>>({});
-  const [dangGui, setDangGui] = useState(false);
-  const [thanhCong, setThanhCong] = useState(false);
+export function FormDatMon({ onGui, choPhepGui }: FormDatMonProps) {
+  const [duLieu, setDuLieu] = useState<DuLieuForm>(GIA_TRI_BAN_DAU);
+  const [loi, setLoi] = useState<LoiForm>({});
 
-  const loi = kiemChung(duLieu);
+  // ✅ useRef + useEffect tự focus ô "Họ tên"
+  const inputHoTenRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    inputHoTenRef.current?.focus();
+  }, []);
 
   function xuLyThayDoi(
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -46,85 +61,76 @@ export function DatMonForm({ tongTien, onDatHang }: DatMonFormProps) {
     setDuLieu((prev) => ({ ...prev, [name]: value }));
   }
 
-  function xuLyRoiO(e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setDaCham((prev) => ({ ...prev, [e.target.name]: true }));
+  function xuLyRoiO(e: FocusEvent<HTMLInputElement>) {
+    const { name } = e.target;
+    const loiMoi = kiemTra(duLieu);
+    setLoi((prev) => ({
+      ...prev,
+      [name]: loiMoi[name as keyof LoiForm],
+    }));
   }
 
-  function loiCuaO(ten: string): string | undefined {
-    return daCham[ten] ? loi[ten] : undefined;
-  }
+  function xuLyGui(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
 
-  async function xuLyGui(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault(); // ✅ Chặn tải lại trang
+    const loiMoi = kiemTra(duLieu);
+    setLoi(loiMoi);
 
-    const tatCa: Record<string, boolean> = {};
-    Object.keys(GIA_TRI_BAN_DAU).forEach((k) => (tatCa[k] = true));
-    setDaCham(tatCa);
+    if (Object.keys(loiMoi).length > 0) return;
 
-    if (Object.keys(kiemChung(duLieu)).length > 0) return;
-
-    setDangGui(true);
-    try {
-      await onDatHang(duLieu);
-      setThanhCong(true);
-      setDuLieu(GIA_TRI_BAN_DAU);
-      setDaCham({});
-      setTimeout(() => setThanhCong(false), 3000);
-    } finally {
-      setDangGui(false);
-    }
+    onGui({
+      hoTen: duLieu.hoTen.trim(),
+      soDienThoai: duLieu.soDienThoai.trim(),
+      ghiChu: duLieu.ghiChu.trim(),
+    });
   }
 
   return (
     <form className="dat-mon-form" onSubmit={xuLyGui} noValidate>
-      <h3>📝 Thông tin đặt món</h3>
-
+      {/* ===== Ô 1: Họ tên ===== */}
       <div className="truong">
-        <label>Họ tên *</label>
+        <label htmlFor="hoTen">Họ tên</label>
         <input
+          id="hoTen"
           name="hoTen"
+          ref={inputHoTenRef}
           value={duLieu.hoTen}
           onChange={xuLyThayDoi}
           onBlur={xuLyRoiO}
           placeholder="Nguyễn Văn A"
-          aria-invalid={loiCuaO('hoTen') ? true : undefined}
+          aria-invalid={loi.hoTen ? true : undefined}
         />
-        {loiCuaO('hoTen') && <p className="thong-bao-loi">{loiCuaO('hoTen')}</p>}
+        {loi.hoTen && (
+          <p className="loi" role="alert">
+            {loi.hoTen}
+          </p>
+        )}
       </div>
 
+      {/* ===== Ô 2: Số điện thoại ===== */}
       <div className="truong">
-        <label>Số điện thoại *</label>
+        <label htmlFor="soDienThoai">Số điện thoại</label>
         <input
+          id="soDienThoai"
           name="soDienThoai"
           value={duLieu.soDienThoai}
           onChange={xuLyThayDoi}
           onBlur={xuLyRoiO}
           placeholder="0912345678"
-          aria-invalid={loiCuaO('soDienThoai') ? true : undefined}
+          aria-invalid={loi.soDienThoai ? true : undefined}
         />
-        {loiCuaO('soDienThoai') && (
-          <p className="thong-bao-loi">{loiCuaO('soDienThoai')}</p>
+        {loi.soDienThoai && (
+          <p className="loi" role="alert">
+            {loi.soDienThoai}
+          </p>
         )}
       </div>
 
+      {/* ===== Ô 3: Ghi chú ===== */}
       <div className="truong">
-        <label>Địa chỉ giao hàng *</label>
-        <input
-          name="diaChi"
-          value={duLieu.diaChi}
-          onChange={xuLyThayDoi}
-          onBlur={xuLyRoiO}
-          placeholder="Số 12 Lê Lợi, TP Huế"
-          aria-invalid={loiCuaO('diaChi') ? true : undefined}
-        />
-        {loiCuaO('diaChi') && (
-          <p className="thong-bao-loi">{loiCuaO('diaChi')}</p>
-        )}
-      </div>
-
-      <div className="truong">
-        <label>Ghi chú</label>
+        <label htmlFor="ghiChu">Ghi chú</label>
         <textarea
+          id="ghiChu"
           name="ghiChu"
           rows={3}
           value={duLieu.ghiChu}
@@ -133,17 +139,18 @@ export function DatMonForm({ tongTien, onDatHang }: DatMonFormProps) {
         />
       </div>
 
-      {thanhCong && (
-        <p className="thong-bao-thanh-cong" role="status">
-          ✓ Đã đặt hàng thành công!
-        </p>
-      )}
-
-      <Nut loai="chinh" kichThuoc="lon" type="submit" disabled={dangGui}>
-        {dangGui
-          ? 'Đang gửi...'
-          : `Đặt hàng · ${tongTien.toLocaleString('vi-VN')}đ`}
-      </Nut>
+      {/* ✅ Nút "Đặt món" — đẹp như nút "Thêm" trong card */}
+       <button
+        type="submit"
+        className="nut-dat-mon"
+        disabled={!choPhepGui}
+      >
+        <span className="nut-dat-mon__icon">🛒</span>
+        <span>Gửi đơn</span>
+      </button>
     </form>
   );
 }
+
+
+export default FormDatMon;

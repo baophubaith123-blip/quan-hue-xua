@@ -1,18 +1,31 @@
-// MonAnCard.tsx — Thẻ món ăn (presentational)
+// MonAnCard.tsx — Thẻ món ăn
+// Gap 1+2: Có nhãn "Hết món", class "dang-chon", nút "Thêm" + "Chi tiết"
+// INT.7.18 — Web FrontEnd nâng cao
+
 import type { MonAn } from './types';
-import { Nut } from '../../components/Nut';
 
 interface MonAnCardProps {
   mon: MonAn;
-  onThemVaoGio: (mon: MonAn) => void;
-  onXemChiTiet: (mon: MonAn) => void;
+  dangChon?: boolean;
+  onChon?: (id: string) => void;
+  onDat?: (id: string) => void;
+  onXemChiTiet?: (mon: MonAn) => void;
 }
 
-export function MonAnCard({ mon, onThemVaoGio, onXemChiTiet }: MonAnCardProps) {
+export function MonAnCard({
+  mon,
+  dangChon = false,
+  onChon,
+  onDat,
+  onXemChiTiet,
+}: MonAnCardProps) {
+  // ✅ Kiểm tra hết món — cast any vì đề có thể chưa có trường này
+  const daHet = (mon as any).daHet === true;
+
   return (
     <article
-      className="mon-an-card"
-      onClick={() => onXemChiTiet(mon)}
+      className={`mon-an-card ${dangChon ? 'dang-chon' : ''}`}
+      onClick={() => onChon?.(mon.id)}
     >
       <div className="mon-an-card__anh-wrapper">
         <img className="mon-an-card__anh" src={mon.hinh} alt={mon.ten} />
@@ -22,29 +35,39 @@ export function MonAnCard({ mon, onThemVaoGio, onXemChiTiet }: MonAnCardProps) {
       <div className="mon-an-card__than">
         <h3 className="mon-an-card__ten">{mon.ten}</h3>
         <p className="mon-an-card__mo-ta">{mon.moTa}</p>
-        <p className="mon-an-card__gia">{mon.gia.toLocaleString('vi-VN')}đ</p>
+
+        {/* ✅ Nhãn "Hết món" */}
+        {daHet && <span className="het-mon">Hết món</span>}
+
+        <p className="mon-an-card__gia">
+          {mon.gia.toLocaleString('vi-VN')} đ
+        </p>
 
         <div className="mon-an-card__hanh-dong">
-          <Nut
-            loai="chinh"
-            kichThuoc="nho"
+          {/* ✅ Nút "Thêm" — đỏ cam filled */}
+          <button
+            type="button"
+            className="nut-them"
+            disabled={daHet}
             onClick={(e) => {
               e.stopPropagation();
-              onThemVaoGio(mon);
+              onDat?.(mon.id);
             }}
           >
             🛒 Thêm
-          </Nut>
-          <Nut
-            loai="phu"
-            kichThuoc="nho"
+          </button>
+
+          {/* ✅ Nút "Chi tiết" — viền cam, nền trắng */}
+          <button
+            type="button"
+            className="nut-chi-tiet"
             onClick={(e) => {
               e.stopPropagation();
-              onXemChiTiet(mon);
+              onXemChiTiet?.(mon);
             }}
           >
             Chi tiết
-          </Nut>
+          </button>
         </div>
       </div>
     </article>

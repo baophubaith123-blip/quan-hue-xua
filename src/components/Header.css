@@ -65,6 +65,38 @@
   letter-spacing: 0.02em;
 }
 
+/* ===== Khu vực bên phải: nút quay lại + giỏ hàng ===== */
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ✅ Nút "Quay lại menu" trong header */
+.header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 16px;
+  background: #ffffff;
+  color: #c2410c;
+  border: 1.5px solid #fed7aa;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.header__back:hover {
+  background: #fff7ed;
+  border-color: #c2410c;
+  transform: translateX(-2px);
+}
+
 /* ===== Cart Button ===== */
 
 .header__cart {
@@ -118,6 +150,7 @@
 @media (max-width: 640px) {
   .header__container {
     padding: 12px 16px;
+    gap: 12px;
   }
 
   .header__ten {
@@ -140,5 +173,10 @@
 
   .header__cart {
     padding: 10px 14px;
+  }
+
+  .header__back {
+    padding: 8px 12px;
+    font-size: 0.78rem;
   }
 }
