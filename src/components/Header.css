@@ -1,0 +1,144 @@
+/* Header.css — Thanh tiêu đề trên cùng */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(194, 65, 12, 0.08);
+  box-shadow: 0 2px 20px rgba(194, 65, 12, 0.06);
+}
+
+.header__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ===== Logo ===== */
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__logo-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(194, 65, 12, 0.15);
+}
+
+.header__logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header__ten {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #7c2d12;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.header__slogan {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #9a3412;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+/* ===== Cart Button ===== */
+
+.header__cart {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 14px;
+  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(124, 45, 18, 0.2);
+}
+
+.header__cart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(124, 45, 18, 0.3);
+}
+
+.header__cart:active {
+  transform: translateY(0);
+}
+
+.header__cart-icon {
+  font-size: 1.3rem;
+}
+
+.header__cart-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  line-height: 1.1;
+}
+
+.header__cart-label {
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
+.header__cart-count {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 640px) {
+  .header__container {
+    padding: 12px 16px;
+  }
+
+  .header__ten {
+    font-size: 1.1rem;
+  }
+
+  .header__slogan {
+    font-size: 0.68rem;
+  }
+
+  .header__logo-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+
+  .header__cart-info {
+    display: none;
+  }
+
+  .header__cart {
+    padding: 10px 14px;
+  }
+}

@@ -1,5 +1,10 @@
 /* ============================================================
    App.css — Quán Huế Xưa
+   Ứng dụng đặt món ăn Huế — INT.7.18
+   ============================================================ */
+
+/* ============================================================
+   Reset & Base
    ============================================================ */
 
 * {
@@ -10,73 +15,22 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   color: #1f2937;
-  background: #fffbeb;
+  background: #fffbf5;
   line-height: 1.5;
 }
 
 /* ============================================================
-   Top Nav — Full width
+   Section Title — Tiêu đề "Thực đơn hôm nay"
    ============================================================ */
 
-.top-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 32px;
-  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%);
-  box-shadow: 0 2px 12px rgba(124, 45, 18, 0.25);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.top-nav__brand {
-  color: #ffffff;
-  font-size: 1.15rem;
-  font-weight: 700;
-}
-
-.top-nav__tabs {
-  display: flex;
-  gap: 6px;
-}
-
-.top-nav__tabs button {
-  padding: 8px 18px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  font-family: inherit;
-}
-
-.top-nav__tabs button:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.top-nav__tabs button.is-active {
-  background: #ffffff;
-  color: #c2410c;
-  border-color: #ffffff;
-}
-
-.top-nav__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
-  margin-left: 6px;
-  background: #dc2626;
-  color: #ffffff;
-  border-radius: 10px;
-  font-size: 0.7rem;
-  font-weight: 700;
+.section-title {
+  margin: 0 0 14px;
+  color: #7c2d12;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: -0.01em;
 }
 
 /* ============================================================
@@ -115,6 +69,10 @@ body {
   box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.15);
 }
 
+.search-box input::placeholder {
+  color: #9ca3af;
+}
+
 .search-box__clear {
   position: absolute;
   right: 10px;
@@ -141,7 +99,7 @@ body {
 }
 
 /* ============================================================
-   Filter
+   Filter — Bộ lọc
    ============================================================ */
 
 .mon-an-filter {
@@ -168,6 +126,7 @@ body {
   outline: none;
   background: #ffffff;
   cursor: pointer;
+  transition: border-color 0.15s ease;
 }
 
 .mon-an-filter__field select:focus {
@@ -181,7 +140,7 @@ body {
 }
 
 /* ============================================================
-   Filter Summary
+   Filter Summary — Dòng "Hiển thị X / Y món"
    ============================================================ */
 
 .filter-summary {
@@ -199,7 +158,7 @@ body {
 }
 
 /* ============================================================
-   ✅ GRID MÓN ĂN — 5 CỘT/HÀNG, FULL WIDTH
+   GRID MÓN ĂN — 5 cột / hàng, full width
    ============================================================ */
 
 .mon-an-grid {
@@ -238,7 +197,7 @@ body {
 }
 
 /* ============================================================
-   Card Món ăn — Gọn cho 5 cột
+   Card Món ăn
    ============================================================ */
 
 .mon-an-card {
@@ -290,6 +249,7 @@ body {
   border-radius: 4px;
   font-size: 0.6rem;
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .mon-an-card__than {
@@ -359,7 +319,7 @@ body {
 }
 
 /* ============================================================
-   Giỏ hàng
+   Trang Giỏ hàng — Header có nút quay lại
    ============================================================ */
 
 .gio-hang-page {
@@ -368,11 +328,53 @@ body {
   padding: 24px;
 }
 
-.gio-hang-page > h1 {
-  color: #7c2d12;
-  text-align: center;
+.gio-hang-page__header {
+  position: relative;
   margin-bottom: 24px;
 }
+
+.gio-hang-page__header h1 {
+  color: #7c2d12;
+  text-align: center;
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.6rem;
+}
+
+.gio-hang-page__back {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8px 14px;
+  background: #ffffff;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  color: #c2410c;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.gio-hang-page__back:hover {
+  background: #fff7ed;
+  border-color: #c2410c;
+  transform: translateY(-50%) translateX(-2px);
+}
+
+@media (max-width: 640px) {
+  .gio-hang-page__back {
+    position: static;
+    transform: none;
+    margin-bottom: 12px;
+  }
+}
+
+/* ============================================================
+   Danh sách giỏ hàng
+   ============================================================ */
 
 .gio-hang-list {
   list-style: none;
@@ -392,6 +394,7 @@ body {
   background: #ffffff;
   border: 1px solid #fed7aa;
   border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(194, 65, 12, 0.06);
 }
 
 .gio-hang-item img {
@@ -467,6 +470,10 @@ body {
   text-align: right;
 }
 
+/* ============================================================
+   Tổng tiền giỏ hàng
+   ============================================================ */
+
 .gio-hang-tong {
   display: flex;
   justify-content: space-between;
@@ -529,7 +536,7 @@ body {
   font-family: inherit;
   font-size: 0.9rem;
   outline: none;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
   background: #ffffff;
 }
 
@@ -557,6 +564,10 @@ body {
   font-style: italic;
 }
 
+.thong-bao-loi::before {
+  content: '⚠ ';
+}
+
 .thong-bao-thanh-cong {
   color: #15803d;
   background: #f0fdf4;
@@ -570,19 +581,12 @@ body {
 }
 
 /* ============================================================
-   Responsive — Nav
+   Responsive — Form đặt món + Giỏ hàng
    ============================================================ */
 
 @media (max-width: 640px) {
-  .top-nav {
-    flex-direction: column;
-    gap: 10px;
-    align-items: stretch;
-    padding: 12px 16px;
-  }
-
-  .top-nav__tabs {
-    justify-content: center;
+  .gio-hang-page {
+    padding: 16px;
   }
 
   .gio-hang-item {
@@ -593,5 +597,9 @@ body {
   .gio-hang-item__tong {
     grid-column: 2;
     text-align: left;
+  }
+
+  .dat-mon-form {
+    padding: 20px;
   }
 }
