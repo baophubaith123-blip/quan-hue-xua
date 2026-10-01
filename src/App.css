@@ -1,0 +1,597 @@
+/* ============================================================
+   App.css — Quán Huế Xưa
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: #1f2937;
+  background: #fffbeb;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Top Nav — Full width
+   ============================================================ */
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%);
+  box-shadow: 0 2px 12px rgba(124, 45, 18, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-nav__brand {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.top-nav__tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.top-nav__tabs button {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.top-nav__tabs button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.top-nav__tabs button.is-active {
+  background: #ffffff;
+  color: #c2410c;
+  border-color: #ffffff;
+}
+
+.top-nav__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  margin-left: 6px;
+  background: #dc2626;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* ============================================================
+   Search Box
+   ============================================================ */
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-box__icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 42px 10px 40px;
+  border: 2px solid #fed7aa;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: #ffffff;
+}
+
+.search-box input:focus {
+  border-color: #c2410c;
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.15);
+}
+
+.search-box__clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e5e7eb;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.search-box__clear:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* ============================================================
+   Filter
+   ============================================================ */
+
+.mon-an-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mon-an-filter__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #7c2d12;
+}
+
+.mon-an-filter__field select {
+  padding: 7px 10px;
+  border: 2px solid #fed7aa;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  outline: none;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.mon-an-filter__field select:focus {
+  border-color: #c2410c;
+}
+
+.mon-an-filter__field input[type='range'] {
+  width: 100%;
+  accent-color: #c2410c;
+  cursor: pointer;
+}
+
+/* ============================================================
+   Filter Summary
+   ============================================================ */
+
+.filter-summary {
+  color: #7c2d12;
+  font-size: 0.9rem;
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+}
+
+.filter-summary strong {
+  color: #c2410c;
+}
+
+/* ============================================================
+   ✅ GRID MÓN ĂN — 5 CỘT/HÀNG, FULL WIDTH
+   ============================================================ */
+
+.mon-an-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+}
+
+/* Tablet lớn: 4 cột */
+@media (max-width: 1200px) {
+  .mon-an-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Tablet: 3 cột */
+@media (max-width: 900px) {
+  .mon-an-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Mobile lớn: 2 cột */
+@media (max-width: 640px) {
+  .mon-an-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile nhỏ: 1 cột */
+@media (max-width: 420px) {
+  .mon-an-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Card Món ăn — Gọn cho 5 cột
+   ============================================================ */
+
+.mon-an-card {
+  border: 1px solid #fed7aa;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(194, 65, 12, 0.08);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mon-an-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(194, 65, 12, 0.15);
+  border-color: #c2410c;
+}
+
+.mon-an-card__anh-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 150px;
+  background: #fef3c7;
+}
+
+.mon-an-card__anh {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.mon-an-card:hover .mon-an-card__anh {
+  transform: scale(1.05);
+}
+
+.mon-an-card__hot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #dc2626;
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.mon-an-card__than {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.mon-an-card__ten {
+  margin: 0;
+  color: #7c2d12;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.mon-an-card__mo-ta {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #6b7280;
+  line-height: 1.35;
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+}
+
+.mon-an-card__gia {
+  margin: 0;
+  color: #c2410c;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.mon-an-card__hanh-dong {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.mon-an-card__hanh-dong .nut {
+  flex: 1;
+  font-size: 0.72rem;
+  padding: 5px 4px;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Empty State
+   ============================================================ */
+
+.empty-state {
+  text-align: center;
+  padding: 40px 24px;
+  background: #fef3c7;
+  border: 1px dashed #f59e0b;
+  border-radius: 12px;
+  color: #92400e;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   Giỏ hàng
+   ============================================================ */
+
+.gio-hang-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.gio-hang-page > h1 {
+  color: #7c2d12;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.gio-hang-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gio-hang-item {
+  display: grid;
+  grid-template-columns: 70px 1fr auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 16px;
+  background: #ffffff;
+  border: 1px solid #fed7aa;
+  border-radius: 10px;
+}
+
+.gio-hang-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.gio-hang-item__info h4 {
+  margin: 0 0 4px;
+  color: #7c2d12;
+  font-size: 1rem;
+}
+
+.gio-hang-item__info p {
+  margin: 0;
+  color: #c2410c;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.gio-hang-item__controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gio-hang-item__controls button {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid #fed7aa;
+  background: #ffffff;
+  color: #c2410c;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.gio-hang-item__controls button:hover {
+  background: #c2410c;
+  color: #ffffff;
+}
+
+.gio-hang-item__controls span {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 700;
+  color: #7c2d12;
+}
+
+.gio-hang-item__xoa {
+  border-color: #fecaca !important;
+  color: #dc2626 !important;
+  margin-left: 6px;
+}
+
+.gio-hang-item__xoa:hover {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+.gio-hang-item__tong {
+  font-weight: 700;
+  color: #c2410c;
+  font-size: 1rem;
+  min-width: 100px;
+  text-align: right;
+}
+
+.gio-hang-tong {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+  border: 1px solid #c2410c;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.gio-hang-tong span {
+  color: #7c2d12;
+  font-weight: 600;
+}
+
+.gio-hang-tong strong {
+  color: #c2410c;
+  font-size: 1.3rem;
+}
+
+/* ============================================================
+   Form đặt món
+   ============================================================ */
+
+.dat-mon-form {
+  background: #ffffff;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  padding: 24px 28px;
+  box-shadow: 0 2px 8px rgba(194, 65, 12, 0.06);
+}
+
+.dat-mon-form h3 {
+  color: #7c2d12;
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #fed7aa;
+  font-size: 1.1rem;
+}
+
+.truong {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.truong label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #7c2d12;
+}
+
+.truong input,
+.truong textarea {
+  padding: 10px 14px;
+  border: 2px solid #fed7aa;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease;
+  background: #ffffff;
+}
+
+.truong input:focus,
+.truong textarea:focus {
+  border-color: #c2410c;
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.1);
+}
+
+.truong textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.truong input[aria-invalid='true'],
+.truong textarea[aria-invalid='true'] {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+
+.thong-bao-loi {
+  color: #dc2626;
+  font-size: 0.78rem;
+  margin: 0;
+  font-style: italic;
+}
+
+.thong-bao-thanh-cong {
+  color: #15803d;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ============================================================
+   Responsive — Nav
+   ============================================================ */
+
+@media (max-width: 640px) {
+  .top-nav {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    padding: 12px 16px;
+  }
+
+  .top-nav__tabs {
+    justify-content: center;
+  }
+
+  .gio-hang-item {
+    grid-template-columns: 60px 1fr;
+    gap: 10px;
+  }
+
+  .gio-hang-item__tong {
+    grid-column: 2;
+    text-align: left;
+  }
+}
